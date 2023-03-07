@@ -8,7 +8,7 @@ orbs:
   aws-ecr: circleci/aws-ecr@8.2.1
 
 jobs:
-  build:
+  test:
     executor:
       name: node/default
       tag: 14.15.1   
@@ -29,7 +29,7 @@ jobs:
 workflows:
   node-tests:
     jobs:
-      - build
+      - test
       #Envs: AWS_ACCESS_KEY, AWS_SECRET_ACCESS_KEY, AWS_REGION, AWS_ECR_ACCOUNT_URL
       - aws-ecr/build-and-push-image:
           repo: mahira
@@ -37,4 +37,4 @@ workflows:
           dockerfile: build/dockerfile.prod
           path: .
           requires:
-            - build
+            - test
