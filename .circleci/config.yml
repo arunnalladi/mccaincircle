@@ -10,8 +10,7 @@ orbs:
 jobs:
   build:
     docker:
-       - image: cimg/node:16.10
-       - image: mongo:4.2.0
+        - image: circleci/node:10
     steps:
     - checkout
     - node/install-packages:
@@ -25,7 +24,7 @@ jobs:
     - store_test_results:
         path: /tmp/test-results   
     - run:
-        name: push image
+        name: build and push image
         command: |
             docker build -t my-app .
             docker tag my-app:latest 148774211651.dkr.ecr.us-east-1.amazonaws.com/mahira:latest
