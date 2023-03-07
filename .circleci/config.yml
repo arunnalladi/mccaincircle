@@ -33,8 +33,6 @@ workflows:
       #Envs: AWS_ACCESS_KEY, AWS_SECRET_ACCESS_KEY, AWS_REGION, AWS_ECR_ACCOUNT_URL
       - aws-ecr/build-and-push-image:
           repo: mahira
-          region: us-east-1
-          executor: aws-ecr/default
           push-image: true
           tag: "latest,v0.1.${CIRCLE_BUILD_NUM}"
           dockerfile: build/dockerfile.prod
