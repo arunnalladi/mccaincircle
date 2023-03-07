@@ -24,6 +24,14 @@ jobs:
         destination: raw-test-output
     - store_test_results:
         path: /tmp/test-results   
+    - run:
+        name: push image
+        command: |
+            docker build -t my-app .
+            docker tag my-app:latest 148774211651.dkr.ecr.us-east-1.amazonaws.com/mahira:latest
+            $(aws ecr get-login --no-include-email --region us-east-1)
+            docker push 148774211651.dkr.ecr.us-east-1.amazonaws.com/mahira:latest
+
 workflows:
   node-tests:
     jobs:
